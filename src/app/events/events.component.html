@@ -1,0 +1,31 @@
+<div>
+  <h1>Events</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Location</th>
+        <th>Status</th>
+        <th>Rescuers</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (event of signalRService.events(); track event.id) {
+      <tr>
+        <td>{{ event.id }}</td>
+        <td>{{ event.location }}</td>
+        <td>{{ event.status }}</td>
+        <td>
+          {{ this.concatRescuers(event.rescuers) }}
+        </td>
+        <td>{{ event.latitude }}</td>
+        <td>{{ event.longitude }}</td>
+        <td><button (click)="onEventClick(event)">Details</button></td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

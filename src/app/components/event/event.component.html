@@ -1,0 +1,32 @@
+<div>
+  <h1>Event {{ eventId() }}</h1>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Rescuer</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (event of signalRService.events() | filterBy: ['id']: eventId();
+        track event.id) { @for (rescuer of event.rescuers; track $index) {
+        <tr>
+          <td>
+            <span
+              appRescuerStatus
+              [status]="event.rescuers[$index].status"
+              class="dot"
+            ></span>
+          </td>
+          <td>{{ event.rescuers[$index].name }}</td>
+          <td>{{ event.rescuers[$index].latitude }}</td>
+          <td>{{ event.rescuers[$index].longitude }}</td>
+        </tr>
+        } }
+      </tbody>
+    </table>
+  </div>
+</div>

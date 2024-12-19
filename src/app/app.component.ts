@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -20,4 +21,11 @@ import { HeaderComponent } from './components/header/header.component';
 })
 export class AppComponent {
   title = 'first-ng-app';
+  authService = inject(AuthService);
+
+  ngOnInit() {
+    this.authService.getUser().subscribe((user) => {
+      this.authService.currentUser.set(user);
+    });
+  }
 }

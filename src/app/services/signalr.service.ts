@@ -30,7 +30,9 @@ export class SignalRService {
       });
 
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(this.endpoint)
+      .withUrl(this.endpoint, {
+        accessTokenFactory: () => localStorage.getItem('token') ?? '',
+      })
       .build();
     this.startConnection().subscribe();
     this.addReconnectionHandler();

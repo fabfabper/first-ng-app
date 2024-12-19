@@ -9,6 +9,12 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'login',
+    loadComponent: () => {
+      return import('./login/login.component').then((m) => m.LoginComponent);
+    },
+  },
+  {
     path: 'todos',
     loadComponent: () => {
       return import('./todos/todos.component').then((m) => m.TodosComponent);
